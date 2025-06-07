@@ -1,43 +1,50 @@
 {
-  "name": "chrome-extensions-samples",
+  "name": "chrome-time-money",
   "version": "1.0.0",
   "private": true,
-  "description": "Official samples for Chrome Extensions and the Chrome Apps platform.",
+  "description": "Chrome extension that converts product prices into working hours",
   "scripts": {
-    "prettier": "npx prettier **/*.{md,html,json} -w",
-    "lint": "eslint **/*.js",
-    "lint:fix": "npm run lint -- --fix",
-    "prepare": "husky install"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "postbuild": "npm run copy-popup-html && npm run copy-icons",
+    "copy-popup-html": "node scripts/copy-popup-html.js",
+    "copy-icons": "node scripts/copy-icons.js",
+    "preview": "vite preview",
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\""
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/GoogleChrome/chrome-extensions-samples.git"
+  "dependencies": {
+    "@radix-ui/react-dialog": "^1.0.5",
+    "@radix-ui/react-label": "^2.0.2",
+    "@radix-ui/react-select": "^2.0.0",
+    "@radix-ui/react-slider": "^1.1.2",
+    "@radix-ui/react-switch": "^1.0.3",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "lucide-react": "^0.323.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwind-merge": "^2.2.1",
+    "tailwindcss-animate": "^1.0.7"
   },
-  "keywords": [],
-  "author": "The Chrome Team",
-  "license": "Apache 2.0",
-  "bugs": {
-    "url": "https://github.com/GoogleChrome/chrome-extensions-samples/issues"
-  },
-  "homepage": "https://github.com/GoogleChrome/chrome-extensions-samples#readme",
   "devDependencies": {
-    "@eslint/js": "9.19.0",
-    "chrome-types": "0.1.335",
-    "eslint": "9.19.0",
-    "eslint-config-prettier": "9.1.0",
-    "eslint-plugin-jest": "28.11.0",
-    "eslint-plugin-prettier": "5.2.1",
-    "globals": "15.14.0",
-    "husky": "9.1.6",
-    "lint-staged": "15.2.10",
-    "prettier": "3.3.3"
-  },
-  "lint-staged": {
-    "**/*.js": [
-      "npx eslint --fix"
-    ],
-    "**/*.{md,html,json}": [
-      "npx prettier --write"
-    ]
+    "@samrum/vite-plugin-web-extension": "^5.0.2",
+    "@types/chrome": "^0.0.260",
+    "@types/node": "^20.11.16",
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.17",
+    "eslint": "^8.55.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "postcss": "^8.4.33",
+    "prettier": "^3.2.4",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.8",
+    "vite-plugin-static-copy": "^0.16.0"
   }
 }

@@ -1,29 +1,52 @@
-# Chrome Extensions samples
+# Time Money Chrome Extension
 
-Official samples for Chrome Extensions and the Chrome Apps platform. (Chrome Apps are deprecated. Learn more [on the Chromium blog](https://blog.chromium.org/2020/08/changes-to-chrome-app-support-timeline.html)).
+A Chrome extension that converts product prices into working hours, helping users understand the real time cost of purchases.
 
-For more information on extensions, see [Chrome Developers](https://developer.chrome.com).
+## Features
 
-## Explore samples
+- Automatic price detection on websites
+- Convert prices to working hours based on your income
+- Support for different income input methods
+- Clean, Apple-inspired design
+- Dark/Light mode support
 
-The directory structure is as follows:
+## Development Setup
 
-- [api-samples/](api-samples/) - extensions focused on a single API package
-- [functional-samples/](functional-samples/) - full featured extensions spanning multiple API packages
-- [\_archive/apps/](_archive/apps/) - deprecated Chrome Apps platform (not listed below)
-- [\_archive/mv2/](_archive/mv2/) - resources for manifest version 2
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+4. Build the extension:
+   ```bash
+   npm run build
+   ```
 
-You can also use the [Samples](https://developer.chrome.com/docs/extensions/samples/) page to discover extensions by type, permissions, and extension API.
+## Loading the Extension in Chrome
 
-## Installation
+1. Open Chrome and go to `chrome://extensions/`
+2. Enable "Developer mode" in the top right
+3. Click "Load unpacked" and select the `dist` directory from this project
 
-To experiment with these samples, please clone this repo and use 'Load Unpacked Extension'.
-Read more on [Development Basics](https://developer.chrome.com/docs/extensions/mv3/getstarted/development-basics/#load-unpacked).
+## Project Structure
+
+```
+src/
+  ├── components/     # React components
+  ├── content.tsx     # Content script for price detection
+  ├── background.ts   # Background service worker
+  ├── popup/         # Popup UI components
+  └── utils/         # Utility functions
+```
 
 ## Contributing
 
-Please see [the CONTRIBUTING file](/CONTRIBUTING.md) for information on contributing to the `chrome-extensions-samples` project.
-
-## License
-
-`chrome-extensions-samples` are authored by Google and are licensed under the [Apache License, Version 2.0](/LICENSE).
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a new Pull Request

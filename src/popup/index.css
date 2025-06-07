@@ -1,0 +1,412 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* High-DPI Chrome Extension Optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+:root {
+  /* Apple System Font Stack */
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
+  line-height: 1.47059;
+  font-weight: 400;
+  background: transparent;
+
+  /* Apple-inspired Color Variables */
+  --apple-blue: #007aff;
+  --apple-blue-light: #5ac8fa;
+  --apple-gray-1: #f2f2f7;
+  --apple-gray-2: #e5e5ea;
+  --apple-gray-3: #d1d1d6;
+  --apple-gray-4: #c7c7cc;
+  --apple-gray-5: #aeaeb2;
+  --apple-gray-6: #8e8e93;
+  --apple-separator: rgba(60, 60, 67, 0.36);
+  --apple-separator-opaque: #c6c6c8;
+
+  /* Custom Earthy Palette */
+  --red-clay: #b85450;
+  --desert: #d4a574;
+  --crevice: #2c2c2e;
+  --cloud-shadow: rgba(0, 0, 0, 0.04);
+
+  --chrome-extension-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  --apple-blue-hover: #0056cc;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --apple-gray-1: #1c1c1e;
+    --apple-gray-2: #2c2c2e;
+    --apple-gray-3: #3a3a3c;
+    --apple-gray-4: #48484a;
+    --apple-gray-5: #636366;
+    --apple-gray-6: #8e8e93;
+    --apple-separator: rgba(84, 84, 88, 0.65);
+    --apple-separator-opaque: #38383a;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: transparent;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow: hidden;
+}
+
+/* Custom Scrollbar for Chrome Extension */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Enhanced Apple-like glassmorphism for popup */
+.w-80 {
+  position: relative;
+  box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 1px 0
+    rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.w-80:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 40px 80px -12px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.08), inset 0 1px 0
+    rgba(255, 255, 255, 0.15);
+}
+
+@media (prefers-color-scheme: dark) {
+  .w-80 {
+    background: rgba(28, 28, 30, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.02), inset 0 1px 0
+      rgba(255, 255, 255, 0.05);
+  }
+
+  .w-80:hover {
+    box-shadow: 0 40px 80px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.04), inset 0 1px 0
+      rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* Enhanced Input Styles */
+input,
+select {
+  border-radius: 0.875rem;
+  background: rgba(242, 242, 247, 0.6);
+  border: 1px solid var(--apple-separator);
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.47059;
+  padding: 0.75rem 1rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-color: var(--apple-blue);
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-1px);
+}
+
+input:hover,
+select:hover {
+  border-color: var(--apple-gray-4);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+@media (prefers-color-scheme: dark) {
+  input,
+  select {
+    background: rgba(44, 44, 46, 0.6);
+    border-color: var(--apple-separator);
+    color: white;
+  }
+
+  input:focus,
+  select:focus {
+    background: rgba(44, 44, 46, 0.9);
+    box-shadow: 0 0 0 4px rgba(90, 200, 250, 0.15), 0 2px 8px rgba(0, 0, 0, 0.3);
+    border-color: var(--apple-blue-light);
+  }
+
+  input:hover,
+  select:hover {
+    background: rgba(58, 58, 60, 0.8);
+    border-color: var(--apple-gray-4);
+  }
+}
+
+/* Enhanced Label Styles */
+label {
+  font-weight: 590;
+  letter-spacing: -0.022em;
+  font-size: 0.9375rem;
+  color: var(--apple-gray-6);
+  margin-bottom: 0.5rem;
+  display: block;
+  transition: color 0.2s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  label {
+    color: var(--apple-gray-5);
+  }
+}
+
+/* Enhanced Time Money Badge Styles */
+.time-money-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.875rem;
+  border-radius: 9999px;
+  font-family: inherit;
+  font-weight: 590;
+  font-size: 0.8125rem;
+  letter-spacing: -0.01em;
+  transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  margin-left: 0.5rem;
+  position: relative;
+  overflow: hidden;
+
+  /* Enhanced glassmorphism */
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  color: var(--red-clay);
+}
+
+.time-money-badge::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 50%);
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  opacity: 0;
+}
+
+.time-money-badge:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.time-money-badge:hover::before {
+  opacity: 1;
+}
+
+.time-money-badge:active {
+  transform: translateY(-1px) scale(1.01);
+  transition: all 0.1s ease;
+}
+
+/* Dark mode badge styles */
+@media (prefers-color-scheme: dark) {
+  .time-money-badge {
+    background: rgba(44, 44, 46, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--desert);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 0 1px 4px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .time-money-badge:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* Badge text hierarchy */
+.time-money-badge span:first-child {
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+.time-money-badge span:nth-child(2) {
+  font-size: 0.95em;
+  font-weight: 500;
+}
+
+.time-money-badge span:last-child {
+  opacity: 0.65;
+  font-size: 0.85em;
+  font-weight: 400;
+}
+
+/* Additional Apple-style utilities */
+.apple-button {
+  background: var(--apple-blue);
+  color: white;
+  border: none;
+  border-radius: 0.875rem;
+  padding: 0.75rem 1.5rem;
+  font-family: inherit;
+  font-weight: 590;
+  font-size: 1rem;
+  letter-spacing: -0.022em;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3);
+}
+
+.apple-button:hover {
+  background: #0056cc;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 122, 255, 0.4);
+}
+
+.apple-button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(0, 122, 255, 0.3);
+}
+
+/* Apple-style card */
+.apple-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 1.25rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.apple-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  .apple-card {
+    background: rgba(28, 28, 30, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* Prevent text selection on UI elements */
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  input,
+  select {
+    border-width: 2px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus styles for accessibility */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid #007aff;
+  outline-offset: 2px;
+}
+
+/* Loading animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Pulse animation for status indicator */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
